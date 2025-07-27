@@ -6,6 +6,9 @@
 #include "../include/HillCipher.h"
 #include "../include/PlayfairCipher.h"
 #include "../include/OTPCipher.h"
+#include "../include/RailFenceCipher.h"
+#include "../include/TPCCipher.h"
+#include "../include/DoubleTranspositionCipher.h"
 
 using namespace std;
 
@@ -128,7 +131,51 @@ int main() {
 
     OTPCipher cipher2(userKey);
     decrypted = cipher2.decrypt(cipherText);
-    std::cout << "Decrypted: " << decrypted << "\n";
+    std::cout << "Decrypted: " << decrypted << "\n\n";
+
+
+
+
+    // CIFRA DE RAILFENCE (TRANSPOSICAO)
+    RailFenceCipher railFence(3);
+
+    std::string plaintext = "ATAQUEAOAMANHECER";
+    std::string encrypted = railFence.encrypt(plaintext);
+    std::string decrypted_railfence = railFence.decrypt(encrypted);
+
+    std::cout << "Texto original cifra de Rail Fence: " << plaintext << "\n";
+    std::cout << "Texto cifrado Rail Fence: " << encrypted << "\n";
+    std::cout << "Texto decifrado Rail Fence: " << decrypted_railfence << "\n\n";
+
+
+
+
+    // CIFRA DE TRANSPOSICAO POR COLUNAS
+    std::string columnKey = "ZEBRAS";
+    ColumnarTranspositionCipher columnCipher(columnKey);
+
+    plainText = "ATTACKATDAWN";
+    cipherText = columnCipher.encrypt(plainText);
+    decrypted = columnCipher.decrypt(cipherText);
+
+    std::cout << "Texto original cifra de Colunas: " << plainText << "\n";
+    std::cout << "Texto cifrado por Colunas: " << cipherText << "\n";
+    std::cout << "Texto decifrado por Colunas: " << decrypted << "\n\n";
+
+
+
+    // CIFRA DE DUPLA TRANSPOSIÇÃO
+    std::string key1 = "ZEBRAS";
+    std::string key2 = "LOVELY";
+    DoubleTranspositionCipher doubleTrans(key1, key2);
+
+    plainText = "ATAQUEAOAMANHECER";
+    cipherText = doubleTrans.encrypt(plainText);
+    decrypted = doubleTrans.decrypt(cipherText);
+
+    std::cout << "Texto original cifra de Dupla Transposicao: " << plainText << "\n";
+    std::cout << "Texto cifrado Dupla Transposicao: " << cipherText << "\n";
+    std::cout << "Texto decifrado Dupla Transposicao: " << decrypted << "\n";
 
     return 0;
 }

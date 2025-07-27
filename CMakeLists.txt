@@ -10,4 +10,7 @@ add_executable(CipherMessing src/main.cpp
         src/models/HillCipher.cpp
         src/models/PlayfairCipher.cpp
         src/models/OTPCipher.cpp
+        src/models/RailFenceCipher.cpp
+        src/models/TPCCipher.cpp
+        src/models/DoubleTranspositionCipher.cpp
 )
